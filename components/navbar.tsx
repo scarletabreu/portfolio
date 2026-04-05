@@ -1,8 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { Code2, Mail, Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { Code2, Menu, X, Moon, Sun } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { useTheme } from 'next-themes'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Monitor } from 'lucide-react'
 
 const links = [
   { id: 'about', en: 'About', es: 'Sobre mí' },
@@ -11,6 +19,81 @@ const links = [
   { id: 'skills', en: 'Skills', es: 'Habilidades' },
   { id: 'contact', en: 'Contact', es: 'Contacto' },
 ]
+
+function SocialIcons() {
+  return (
+    <div className="flex items-center gap-3">
+      <a
+        href="https://github.com/scarletabreu"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="rounded-full p-1.5 text-muted-foreground transition-all hover:bg-accent hover:text-accent-foreground"
+        aria-label="GitHub"
+      >
+        <Code2 className="h-5 w-5" />
+      </a>
+    </div>
+  )
+}
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return <div className="h-5 w-5" />
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+            className="rounded-full p-1.5 text-muted-foreground transition-all hover:bg-accent hover:text-accent-foreground focus:outline-none"
+            aria-label="Toggle Theme"
+        >
+            {theme === 'dark' ? <Moon className="h-5 w-5" /> : theme === 'light' ? <Sun className="h-5 w-5" /> : <Monitor className="h-5 w-5" />}
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setTheme('light')}>
+            <Sun className="mr-2 h-4 w-4" /> Light
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>
+            <Moon className="mr-2 h-4 w-4" /> Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('system')}>
+            <Monitor className="mr-2 h-4 w-4" /> System
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+function LangToggle({ lang, setLang }: { lang: 'en' | 'es'; setLang: (l: 'en' | 'es') => void }) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+            className="rounded-full px-2 py-1 text-xs font-semibold text-muted-foreground transition-all hover:bg-accent hover:text-accent-foreground focus:outline-none"
+            aria-label="Change Language"
+        >
+            {lang === 'en' ? 'EN' : 'ES'}
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setLang('en')}>
+            English
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setLang('es')}>
+            Español
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -21,8 +104,9 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
 
         {/* Logo */}
-        <Link href="/" className="text-lg font-bold gradient-text">
-          scarlet.dev
+        <Link  href="/" 
+        className="text-2xl font-extrabold tracking-tighter gradient-text transition-opacity hover:opacity-80">
+            Scarlet Abreu
         </Link>
 
         {/* Nav links - desktop */}
@@ -31,37 +115,26 @@ export function Navbar() {
             <a
               key={link.id}
               href={`#${link.id}`}
-              className="transition-colors hover:text-primary"
+              className="rounded-md px-2 py-1 transition-all hover:bg-accent hover:text-accent-foreground"
             >
               {lang === 'en' ? link.en : link.es}
             </a>
           ))}
         </nav>
 
+        {/* Right side */}
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setLang(lang === 'en' ? 'es' : 'en')}
-            className="text-xs font-semibold text-muted-foreground hover:text-primary transition-colors"
-          >
-            {lang === 'en' ? 'ES' : 'EN'}
-          </button>
-
-          <a href="https://github.com/scarletabreu" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-primary">
-            <Code2 className="h-5 w-5" />
-          </a>
-          <a href="https://linkedin.com/in/scarlet-abreu" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </a>
-          <a href="mailto:scarletabreuofc@gmail.com" className="text-muted-foreground transition-colors hover:text-primary">
-            <Mail className="h-5 w-5" />
-          </a>
+          <LangToggle lang={lang} setLang={setLang} />
+          <ThemeToggle />
+          <div className="hidden sm:block">
+            <SocialIcons />
+          </div>
 
           {/* Mobile menu button */}
           <button
             className="md:hidden text-muted-foreground hover:text-primary transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -75,12 +148,15 @@ export function Navbar() {
             <a
               key={link.id}
               href={`#${link.id}`}
-              className="transition-colors hover:text-primary"
+              className="rounded-md px-2 py-1 transition-all hover:bg-accent hover:text-accent-foreground"
               onClick={() => setMenuOpen(false)}
             >
               {lang === 'en' ? link.en : link.es}
             </a>
           ))}
+          <div className="flex pt-2 border-t border-border/50">
+            <SocialIcons />
+          </div>
         </nav>
       )}
     </header>
