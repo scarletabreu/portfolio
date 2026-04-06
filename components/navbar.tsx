@@ -19,6 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useApp } from "./providers";
 
 const links = [
   { id: "about", en: "About", es: "Sobre mí", icon: User },
@@ -99,37 +100,30 @@ function ThemeToggle() {
   );
 }
 
-function LangToggle({
-  lang,
-  setLang,
-}: {
-  lang: "en" | "es";
-  setLang: (l: "en" | "es") => void;
-}) {
+function LangToggle() {
+  const { lang, setLang } = useApp()
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="flex h-8 items-center gap-1 rounded-full px-2 text-xs font-semibold text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary focus:outline-none border border-transparent hover:border-primary/20">
-          <span className={lang === "en" ? "text-primary" : ""}>EN</span>
+          <span className={lang === 'en' ? 'text-primary' : ''}>EN</span>
           <span className="text-border">/</span>
-          <span className={lang === "es" ? "text-primary" : ""}>ES</span>
+          <span className={lang === 'es' ? 'text-primary' : ''}>ES</span>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setLang("en")}>
-          English
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setLang("es")}>
-          Español
-        </DropdownMenuItem>
+        {/* Al hacer clic aquí, se actualiza el AppProvider y todo se traduce */}
+        <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setLang('es')}>Español</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }
 
 export function Navbar() {
-  const [lang, setLang] = useState<"en" | "es">("en");
-  const [active, setActive] = useState("");
+  const { lang, setLang } = useApp();
+  const [active, setActive] = useState("about");
 
   const scrollTo = (id: string) => {
     setActive(id);
@@ -147,7 +141,8 @@ export function Navbar() {
         </Link>
 
         {/* Links */}
-        <nav className="flex items-center gap-1 rounded-3xl border border-border bg-card/80 backdrop-blur-sm p-1.5 text-foreground">
+        <nav className="flex items-center gap-1 rounded-3xl border border-border bg-card/80 backdrop-blur-sm p-1.5">
+          {" "}
           {links.map((link) => {
             const Icon = link.icon;
             const isActive = active === link.id;
@@ -169,7 +164,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <LangToggle lang={lang} setLang={setLang} />
+          <LangToggle />
           <ThemeToggle />
           <SocialLink
             href="https://github.com/scarletabreu"
@@ -181,7 +176,7 @@ export function Navbar() {
 
       <header className="fixed top-0 left-0 right-0 z-50 flex md:hidden items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-lg">
         <span className="font-semibold text-foreground">
-          Scarlet<span className="text-primary">.</span>
+          Scarlet Abreu | CS & Mobile Developer<span className="text-primary"></span>
         </span>
         <div className="flex items-center gap-2">
           <SocialLink
@@ -189,7 +184,7 @@ export function Navbar() {
             label="GitHub"
             icon={<GitHubIcon />}
           />
-          <LangToggle lang={lang} setLang={setLang} />
+          <LangToggle />
           <ThemeToggle />
         </div>
       </header>
