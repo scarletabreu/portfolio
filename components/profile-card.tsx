@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Mail } from "lucide-react";
+import { Mail, MapPin, GraduationCap } from "lucide-react";
+import { useApp } from "@/components/providers";
+import { useEffect, useState } from "react";
 
 function SocialLink({
   href,
@@ -18,13 +20,12 @@ function SocialLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card text-muted-foreground transition-all hover:border-primary hover:bg-primary/10 hover:text-primary hover:scale-110"
+      className="flex h-11 w-11 items-center justify-center rounded-3xl border border-border bg-card text-muted-foreground transition-all hover:border-primary hover:bg-primary/10 hover:text-primary hover:scale-110 shadow-sm relative z-10"
     >
       {icon}
     </a>
   );
 }
-
 const LinkedInIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -48,37 +49,71 @@ const GitHubIcon = () => (
 );
 
 export function ProfileCard() {
+  const { t } = useApp();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true);
+  }, []);
+
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-2xl shadow-primary/10">
-      {/* Photo*/}
-      <div className="relative h-72 w-full lg:h-80">
-        <Image
-          src="/avatar.png"
-          alt="Scarlet Abreu"
-          fill
-          className="object-cover object-top"
-          priority
-        />
+    <div
+      className={`group relative overflow-hidden rounded-3xl border border-border bg-card shadow-xl shadow-primary/5 transition-all ease-out 
+      ${isMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+    >
+      <div className="absolute -inset-[1px] -z-10 opacity-0 blur-2xl transition-all duration-700 group-hover:opacity-100">
+        <div className="absolute top-0 left-1/2 h-full w-full -translate-x-1/2 bg-[radial-gradient(circle,rgba(139,92,246,0.2)_0%,transparent_70%)]" />
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col items-center px-6 py-6 text-center">
-        {/* Name */}
-        <h2 className="mb-2 text-2xl font-bold tracking-tight text-foreground lg:text-3xl">
-          Scarlet Abreu
+      {/* Photo Section */}
+      <div className="relative w-full border-b border-border/50 bg-muted/5 py-6 lg:py-0">
+        <div className="relative mx-auto w-40 aspect-square overflow-hidden rounded-full border-2 border-primary/20 sm:w-48 lg:w-full lg:aspect-[4/5] lg:rounded-none lg:border-none">
+          <Image
+            src="/avatar.png"
+            alt={t.profile.name}
+            fill
+            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
+            priority
+          />
+        </div>
+
+        <div className="absolute inset-0 bg-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      </div>
+
+      {/* Content Section */}
+      <div className="relative z-10 flex flex-col items-center px-6 py-8 text-center">
+        <h2 className="mb-2 text-2xl font-bold tracking-tight text-foreground lg:text-3xl transition-colors duration-300 group-hover:text-primary">
+          {t.profile.name}
         </h2>
 
-        {/* Accent line */}
-        <div className="mb-4 h-0.5 w-10 rounded-full bg-primary" />
-
-        {/* Description */}
-        <p className="mb-6 text-sm text-muted-foreground leading-relaxed">
-          Flutter Developer Intern | Computer Science Engineering Student |
-          Interested in AI & Machine Learning
+        <p className="mb-4 text-xs font-medium leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
+          {t.profile.role}
         </p>
 
-        {/* Social icons */}
-        <div className="flex items-center gap-3">
+        <div className="mb-6 h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
+
+        <div className="mb-8 flex flex-col gap-4 text-sm text-muted-foreground w-full">
+          <div className="flex items-start gap-3 px-2 transition-all duration-300 group-hover:translate-x-2">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+              <MapPin className="h-4 w-4" />
+            </div>
+            <span className="text-left leading-tight self-center">
+              {t.profile.location}
+            </span>
+          </div>
+
+          <div className="flex items-start gap-3 px-2 transition-all duration-300 group-hover:translate-x-2">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+              <GraduationCap className="h-4 w-4" />
+            </div>
+            <span className="text-left leading-tight self-center">
+              {t.experience.edu.school}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-3">
           <SocialLink
             href="https://github.com/scarletabreu"
             label="GitHub"
@@ -96,6 +131,9 @@ export function ProfileCard() {
           />
         </div>
       </div>
+
+      <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/10 blur-3xl transition-all duration-1000 group-hover:bg-primary/20 group-hover:scale-150" />
+      <div className="absolute -top-12 -left-12 h-32 w-32 rounded-full bg-primary/5 blur-3xl opacity-0 transition-all duration-1000 group-hover:opacity-100 group-hover:scale-150" />
     </div>
   );
 }
