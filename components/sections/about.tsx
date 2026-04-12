@@ -23,7 +23,7 @@ const statValues: {
 }[] = [
   { value: "3.4", key: "gpa" },
   { value: "10+", key: "certs" },
-  { value: "2yrs", key: "teaching" },
+  { value: "1.5", key: "teaching" },
   { value: "3", key: "languages" },
 ];
 
@@ -50,7 +50,6 @@ export function AboutSection() {
 
   return (
     <section id="about" ref={ref} className="relative overflow-hidden py-24">
-      {/* ── Background ─────────────────────── */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-primary/15 blur-[128px]" />
         <div className="absolute bottom-1/4 right-1/3 h-64 w-64 rounded-full bg-accent/15 blur-[96px]" />
