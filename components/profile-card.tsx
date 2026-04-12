@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Mail, MapPin, GraduationCap } from "lucide-react";
+import { Mail, MapPin, GraduationCap, Code2, Sparkles, Terminal, Cpu } from "lucide-react";
 import { useApp } from "@/components/providers";
 import { useEffect, useState } from "react";
 
@@ -59,15 +59,24 @@ export function ProfileCard() {
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-3xl border border-border bg-card shadow-xl shadow-primary/5 transition-all ease-out 
+      className={`group relative overflow-hidden rounded-3xl border border-border bg-card shadow-xl shadow-primary/5 transition-[opacity,transform] duration-1000 ease-out 
       ${isMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
     >
+      {/* ── Iconos Flotantes Internos (Aparecen en Hover) ── */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <Terminal className="absolute -left-2 top-10 h-12 w-12 text-primary/10 transition-all duration-700 group-hover:-translate-x-2 group-hover:rotate-12 group-hover:opacity-40" />
+        <Sparkles className="absolute -right-4 top-40 h-10 w-10 text-accent/10 transition-all duration-1000 group-hover:translate-x-2 group-hover:-rotate-12 group-hover:opacity-40" />
+        <Cpu className="absolute bottom-10 -left-4 h-8 w-8 text-primary/10 transition-all duration-500 group-hover:-translate-x-1 group-hover:opacity-30" />
+        <Code2 className="absolute -right-2 bottom-20 h-14 w-14 text-primary/5 transition-all duration-1000 group-hover:rotate-45 group-hover:opacity-20" />
+      </div>
+
+      {/* ── Highlight Animado (Detrás) ── */}
       <div className="absolute -inset-[1px] -z-10 opacity-0 blur-2xl transition-all duration-700 group-hover:opacity-100">
         <div className="absolute top-0 left-1/2 h-full w-full -translate-x-1/2 bg-[radial-gradient(circle,rgba(139,92,246,0.2)_0%,transparent_70%)]" />
       </div>
 
       {/* Photo Section */}
-      <div className="relative w-full border-b border-border/50 bg-muted/5 py-6 lg:py-0">
+      <div className="relative w-full border-b border-border/50 bg-muted/5 py-6 lg:py-0 z-10">
         <div className="relative mx-auto w-40 aspect-square overflow-hidden rounded-full border-2 border-primary/20 sm:w-48 lg:w-full lg:aspect-[4/5] lg:rounded-none lg:border-none">
           <Image
             src="/avatar.png"
@@ -77,7 +86,6 @@ export function ProfileCard() {
             priority
           />
         </div>
-
         <div className="absolute inset-0 bg-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
 
@@ -132,6 +140,7 @@ export function ProfileCard() {
         </div>
       </div>
 
+      {/* Orbes de fondo dinámicos */}
       <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/10 blur-3xl transition-all duration-1000 group-hover:bg-primary/20 group-hover:scale-150" />
       <div className="absolute -top-12 -left-12 h-32 w-32 rounded-full bg-primary/5 blur-3xl opacity-0 transition-all duration-1000 group-hover:opacity-100 group-hover:scale-150" />
     </div>

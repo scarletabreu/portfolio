@@ -101,38 +101,81 @@ function ThemeToggle() {
 }
 
 function LangToggle() {
-  const { lang, setLang } = useApp()
+  const { lang, setLang } = useApp();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="flex h-8 items-center gap-1 rounded-full px-2 text-xs font-semibold text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary focus:outline-none border border-transparent hover:border-primary/20">
-          <span className={lang === 'en' ? 'text-primary' : ''}>EN</span>
+          <span className={lang === "en" ? "text-primary" : ""}>EN</span>
           <span className="text-border">/</span>
-          <span className={lang === 'es' ? 'text-primary' : ''}>ES</span>
+          <span className={lang === "es" ? "text-primary" : ""}>ES</span>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {/* Al hacer clic aquí, se actualiza el AppProvider y todo se traduce */}
-        <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setLang('es')}>Español</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setLang("en")}>
+          English
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setLang("es")}>
+          Español
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
 
 export function Navbar() {
-  const { lang, setLang } = useApp();
+  const { lang } = useApp();
   const [active, setActive] = useState("about");
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -70% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions,
+    );
+
+    links.forEach((link) => {
+      const element = document.getElementById(link.id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const scrollTo = (id: string) => {
-    setActive(id);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 hidden md:flex items-center justify-between border-b border-border/50 bg-background/80 backdrop-blur-md px-6 h-16">
+      {/* Desktop Navbar */}
+      <header className="fixed top-0 left-0 right-0 z-50 hidden md:flex items-center justify-between border-b border-border/50 bg-background/80 backdrop-blur-md px-6 h-16 transition-colors duration-300">
         <Link
           href="/"
           className="text-sm font-bold text-primary transition-opacity hover:opacity-80"
@@ -140,9 +183,7 @@ export function Navbar() {
           Scarlet Abreu | CS & Mobile Developer
         </Link>
 
-        {/* Links */}
-        <nav className="flex items-center gap-1 rounded-3xl border border-border bg-card/80 backdrop-blur-sm p-1.5">
-          {" "}
+        <nav className="flex items-center gap-1 rounded-3xl border border-border bg-card/80 backdrop-blur-sm p-1.5 shadow-sm">
           {links.map((link) => {
             const Icon = link.icon;
             const isActive = active === link.id;
@@ -152,7 +193,7 @@ export function Navbar() {
                 onClick={() => scrollTo(link.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-3xl text-sm font-medium transition-all duration-300 ${
                   isActive
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25 scale-105"
                     : "text-muted-foreground hover:text-primary hover:bg-primary/10"
                 }`}
               >
@@ -174,9 +215,10 @@ export function Navbar() {
         </div>
       </header>
 
+      {/* Mobile Top Bar */}
       <header className="fixed top-0 left-0 right-0 z-50 flex md:hidden items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-lg">
-        <span className="font-semibold text-foreground">
-          Scarlet Abreu | CS & Mobile Developer<span className="text-primary"></span>
+        <span className="font-semibold text-foreground text-sm">
+          Scarlet Abreu <span className="text-primary">| CS</span>
         </span>
         <div className="flex items-center gap-2">
           <SocialLink
@@ -189,8 +231,8 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Mobile bottom nav */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 flex md:hidden items-center justify-around px-2 py-2 border-t border-border bg-background/95 backdrop-blur-lg">
+      {/* Mobile Bottom Nav */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 flex md:hidden items-center justify-around px-2 py-2 border-t border-border bg-background/95 backdrop-blur-lg pb-safe">
         {links.map((link) => {
           const Icon = link.icon;
           const isActive = active === link.id;
@@ -200,16 +242,22 @@ export function Navbar() {
               onClick={() => scrollTo(link.id)}
               className={`flex flex-col items-center gap-1 p-2 rounded-3xl transition-all min-w-[60px] ${
                 isActive
-                  ? "text-primary"
+                  ? "text-primary translate-y-[-4px]"
                   : "text-muted-foreground hover:text-primary"
               }`}
             >
               <div
-                className={`flex h-10 w-10 items-center justify-center rounded-3xl transition-all ${isActive ? "bg-primary/10" : "hover:bg-primary/10"}`}
+                className={`flex h-10 w-10 items-center justify-center rounded-3xl transition-all ${
+                  isActive
+                    ? "bg-primary/15 shadow-inner"
+                    : "hover:bg-primary/10"
+                }`}
               >
-                <Icon className="h-5 w-5" />
+                <Icon
+                  className={`h-5 w-5 ${isActive ? "animate-pulse" : ""}`}
+                />
               </div>
-              <span className="text-[10px] font-medium">
+              <span className="text-[10px] font-bold">
                 {lang === "en" ? link.en : link.es}
               </span>
             </button>
