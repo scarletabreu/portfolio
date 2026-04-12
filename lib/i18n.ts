@@ -30,7 +30,7 @@ export const translations = {
       label: "Who I am",
       title: "About me",
       p1: "I am a final-year Computer Science Engineering student at PUCMM and a Mobile Developer at Alphnology. My focus lies in building high-performance mobile solutions that bridge the gap between complex backend architectures and intuitive user experiences.",
-      p2: "With two years of experience as a Programming Instructor, I have mastered the art of breaking down complex technical concepts for diverse audiences. This background has been pivotal in my ability to write maintainable code and collaborate effectively within multidisciplinary agile teams.",
+      p2: "With one and a half years of experience as a Programming Instructor, I have mastered the art of breaking down complex technical concepts for diverse audiences. This background has been pivotal in my ability to write maintainable code and collaborate effectively within multidisciplinary agile teams.",
       p3: "Beyond coding, I serve as Vice President of the CS Engineering Student Committee, where I lead high-impact initiatives and hackathons. My commitment to excellence is backed by a robust portfolio of certifications from industry leaders like AWS, IBM, and Meta.",
       stats: {
         gpa: "GPA / 4.0",
@@ -79,23 +79,23 @@ export const translations = {
         },
         instructor: {
           title: "Programming Instructor",
-          org: "CodeLab Academy",
-          period: "Apr 2024 – Feb 2026",
+          org: "Centenaria",
+          period: "Mar 2023 – Dec 2024",
           bullets: [
             "Taught C, Java, Python, HTML/CSS, and introductory programming concepts",
             "Prepared course materials, exercises, and evaluations",
-            "Mentored 50+ students in programming fundamentals",
+            "Mentored 20+ students in programming fundamentals",
             "Achieved 95% student satisfaction rate",
           ],
         },
         vp: {
           title: "Vice President",
           org: "CS Engineering Student Committee",
-          period: "Aug 2025 – Present",
+          period: "Dec 2025 – Present",
           bullets: [
             "Organizing tech talks, hackathons, and networking events",
             "Representing student interests to faculty and administration",
-            "Managing a team of 12 committee members",
+            "Managing a team of 40 committee members",
           ],
         },
       },
@@ -204,9 +204,9 @@ export const translations = {
       label: "Quién soy",
       title: "Sobre mí",
       p1: "Soy estudiante de término de Ingeniería en Ciencias de la Computación en la PUCMM y desarrolladora móvil en Alphnology. Me especializo en crear soluciones móviles de alto rendimiento, conectando arquitecturas de backend complejas con experiencias de usuario intuitivas.",
-      p2: "Cuento con dos años de experiencia como instructora de programación, lo que me ha permitido perfeccionar la comunicación de conceptos técnicos avanzados. Esta base ha sido clave para desarrollar código mantenible y colaborar eficientemente en equipos ágiles multidisciplinarios.",
+      p2: "Cuento con un año y medio de experiencia como instructora de programación, lo que me ha permitido perfeccionar la comunicación de conceptos técnicos avanzados. Esta base ha sido clave para desarrollar código mantenible y colaborar eficientemente en equipos ágiles multidisciplinarios.",
       p3: "Más allá del desarrollo, me desempeño como Vicepresidenta del Comité de Estudiantes de Ingeniería CS, liderando hackathons e iniciativas de alto impacto. Mi compromiso profesional está respaldado por certificaciones estratégicas de AWS, IBM, Meta y UC San Diego.",
-      stats: {  
+      stats: {
         gpa: "GPA / 4.0",
         certs: "Certificaciones",
         teaching: "Exp. docente",
@@ -253,23 +253,23 @@ export const translations = {
         },
         instructor: {
           title: "Instructora de Programación",
-          org: "CodeLab Academy",
-          period: "Abr 2024 – Feb 2026",
+          org: "Centenaria",
+          period: "Mar 2023 – Dec 2024",
           bullets: [
             "Enseñé C, Java, Python, HTML/CSS y fundamentos de programación",
             "Preparé materiales, ejercicios y evaluaciones",
-            "Mentoreé a más de 50 estudiantes",
+            "Mentoreé a más de 20 estudiantes",
             "Logré 95% de satisfacción estudiantil",
           ],
         },
         vp: {
           title: "Vicepresidenta",
           org: "Comité Estudiantil de Ingeniería CS",
-          period: "Ago 2025 – Presente",
+          period: "Dec 2025 – Presente",
           bullets: [
             "Organizando charlas técnicas, hackathons y eventos",
             "Representando estudiantes ante la facultad",
-            "Gestionando un equipo de 12 miembros",
+            "Gestionando un equipo de 40 miembros",
           ],
         },
       },
