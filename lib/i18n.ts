@@ -9,13 +9,11 @@ export const translations = {
       skills: "Skills",
       contact: "Contact",
     },
-
     profile: {
       name: "Scarlet Abreu",
       role: "CS Engineering Student | Mobile Developer | AI & Machine Learning",
       location: "Dominican Republic",
     },
-
     hero: {
       available: "Available for opportunities",
       greeting: "Hi, I'm",
@@ -25,7 +23,6 @@ export const translations = {
       viewWork: "View my work",
       getInTouch: "Get in touch",
     },
-
     about: {
       label: "Who I am",
       title: "About me",
@@ -58,7 +55,6 @@ export const translations = {
         },
       },
     },
-
     experience: {
       label: "Career path",
       title: "Experience",
@@ -106,40 +102,42 @@ export const translations = {
         gpa: "GPA: 3.4/4.0",
       },
     },
-
     projects: {
       label: "My work",
       title: "Featured Projects",
+      featured: "Featured",
+      inProgress: "In Progress",
+      code: "Code",
+      demo: "Demo",
       viewAll: "View all projects",
       viewProject: "View project",
       items: {
-        taskflow: {
-          title: "TaskFlow",
-          desc: "A productivity app with task management, habit tracking, and analytics dashboard built with Flutter.",
+        haskell: {
+          title: "Haskell Interpreter",
+          desc: "Functional interpreter featuring algebraic types, pure evaluation motor, and error handling with Either.",
         },
-        studybuddy: {
-          title: "StudyBuddy",
-          desc: "AI-powered flashcard app that generates questions from notes using GPT integration.",
+        bi: {
+          title: "BI Contraloría",
+          desc: "Business Intelligence project using K-means clustering to segment public payroll and provide data-driven insights.",
         },
-        ecohub: {
-          title: "EcoHub",
-          desc: "Community platform for environmental initiatives with real-time chat and event management.",
+        mantra: {
+          title: "Mantra Daily Quotes",
+          desc: "Minimalist Android app designed with MVVM to deliver daily motivational quotes with an elegant UI.",
         },
-        fintrack: {
-          title: "FinTrack",
-          desc: "Personal finance tracker with expense categorization, budgets, and visual reports.",
+        syncro: {
+          title: "Syncro Event Manager",
+          desc: "Event system built with Javalin and H2, deployed using Docker multi-stage and Caddy reverse proxy.",
         },
-        healthmate: {
-          title: "HealthMate",
-          desc: "Health monitoring app with medication reminders and doctor appointment scheduling.",
+        goservice: {
+          title: "GoService Systemd",
+          desc: "Production-ready Go microservice with full systemd integration, journald logging, and secure privilege separation.",
         },
-        codequest: {
-          title: "CodeQuest",
-          desc: "Gamified platform for learning programming with challenges and leaderboards.",
+        dental: {
+          title: "Dental Clinic System",
+          desc: "Clinical management system for patient records and treatment tracking — currently in development.",
         },
       },
     },
-
     skills: {
       label: "Tech stack",
       title: "Skills & Tools",
@@ -150,12 +148,10 @@ export const translations = {
         other: "Other",
       },
     },
-
     certs: {
       label: "Credentials",
       title: "Certifications",
     },
-
     contact: {
       label: "Get in touch",
       title: "Let's Connect",
@@ -168,13 +164,11 @@ export const translations = {
       sendMessage: "Send message",
       bio: "I’m passionate about building impactful mobile applications and continuously learning new technologies. Feel free to reach out!",
     },
-
     footer: {
       rights: "All rights reserved.",
       builtWith: "Built with Next.js & Tailwind CSS",
     },
   },
-
   es: {
     nav: {
       about: "Sobre mí",
@@ -183,13 +177,11 @@ export const translations = {
       skills: "Habilidades",
       contact: "Contacto",
     },
-
     profile: {
       name: "Scarlet Abreu",
       role: "Desarrolladora Móvil | Estudiante de Ingeniería CS | IA & ML",
       location: "República Dominicana",
     },
-
     hero: {
       available: "Disponible para oportunidades",
       greeting: "Hola, soy",
@@ -199,7 +191,6 @@ export const translations = {
       viewWork: "Ver mi trabajo",
       getInTouch: "Contáctame",
     },
-
     about: {
       label: "Quién soy",
       title: "Sobre mí",
@@ -232,7 +223,6 @@ export const translations = {
         },
       },
     },
-
     experience: {
       label: "Trayectoria",
       title: "Experiencia",
@@ -280,40 +270,42 @@ export const translations = {
         gpa: "GPA: 3.4/4.0",
       },
     },
-
     projects: {
       label: "Mi trabajo",
       title: "Proyectos Destacados",
+      featured: "Destacado",
+      inProgress: "En Progreso",
+      code: "Código",
+      demo: "Demo",
       viewAll: "Ver todos los proyectos",
       viewProject: "Ver proyecto",
       items: {
-        taskflow: {
-          title: "TaskFlow",
-          desc: "App de productividad con gestión de tareas, hábitos y dashboard analítico.",
+        haskell: {
+          title: "Intérprete Haskell",
+          desc: "Intérprete funcional con tipos algebraicos, motor de evaluación puro y manejo de errores con Either.",
         },
-        studybuddy: {
-          title: "StudyBuddy",
-          desc: "App de flashcards con IA que genera preguntas a partir de notas.",
+        bi: {
+          title: "BI Contraloría",
+          desc: "Proyecto de BI que utiliza clustering K-means para segmentar nómina pública y generar insights institucionales.",
         },
-        ecohub: {
-          title: "EcoHub",
-          desc: "Plataforma comunitaria con chat en tiempo real y gestión de eventos.",
+        mantra: {
+          title: "Mantra Daily Quotes",
+          desc: "App minimalista de Android con MVVM para entregar frases motivacionales con una interfaz elegante.",
         },
-        fintrack: {
-          title: "FinTrack",
-          desc: "Gestor financiero personal con categorización y reportes visuales.",
+        syncro: {
+          title: "Syncro Event Manager",
+          desc: "Gestión de eventos con Javalin y H2, desplegado con Docker multi-stage y proxy inverso Caddy.",
         },
-        healthmate: {
-          title: "HealthMate",
-          desc: "App de salud con recordatorios y gestión de citas médicas.",
+        goservice: {
+          title: "GoService Systemd",
+          desc: "Microservicio en Go listo para producción con integración de systemd, journald y seguridad avanzada.",
         },
-        codequest: {
-          title: "CodeQuest",
-          desc: "Plataforma gamificada para aprender programación.",
+        dental: {
+          title: "Gestión Dental",
+          desc: "Sistema integral para expedientes clínicos y seguimiento de tratamientos — actualmente en desarrollo.",
         },
       },
     },
-
     skills: {
       label: "Stack técnico",
       title: "Habilidades & Herramientas",
@@ -324,12 +316,10 @@ export const translations = {
         other: "Otros",
       },
     },
-
     certs: {
       label: "Credenciales",
       title: "Certificaciones",
     },
-
     contact: {
       label: "Contáctame",
       title: "Conectemos",
@@ -342,7 +332,6 @@ export const translations = {
       sendMessage: "Enviar mensaje",
       bio: "Me enfoco en construir aplicaciones móviles de impacto y en seguir aprendiendo constantemente. ¡No dudes en contactarme!",
     },
-
     footer: {
       rights: "Todos los derechos reservados.",
       builtWith: "Hecho con Next.js & Tailwind CSS",
