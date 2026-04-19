@@ -1,6 +1,7 @@
 import { ProfileCard } from "@/components/profile-card";
 import { AboutSection } from "@/components/sections/about";
 import { ExperienceSection } from "@/components/sections/experience";
+import { ProjectsSection } from "@/components/sections/projects";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <main className="min-w-0 flex-1 pb-24 lg:pb-10">
           <AboutSection />
           <ExperienceSection />
+          <ProjectsSection/>
         </main>
       </div>
     </div>
