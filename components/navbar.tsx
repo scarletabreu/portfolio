@@ -67,7 +67,6 @@ function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
   if (!mounted) return <div className="h-8 w-8" />;
@@ -148,8 +147,11 @@ export function Navbar() {
       observerOptions,
     );
 
-    links.forEach((link) => {
-      const element = document.getElementById(link.id);
+    // Incluimos hero para que el observer tenga un estado inicial al tope de la página
+    const sectionIds = ["hero", ...links.map((link) => link.id)];
+
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
       if (element) observer.observe(element);
     });
 
@@ -218,7 +220,7 @@ export function Navbar() {
       {/* Mobile Top Bar */}
       <header className="fixed top-0 left-0 right-0 z-50 flex md:hidden items-center justify-between px-4 py-3 border-b border-border bg-background/95 backdrop-blur-lg">
         <span className="font-semibold text-foreground text-sm">
-          Scarlet Abreu <span className="text-primary">| CS</span>
+          Scarlet <span className="text-primary">Abreu</span>
         </span>
         <div className="flex items-center gap-2">
           <SocialLink
